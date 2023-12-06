@@ -83,6 +83,7 @@ export default ():JSX.Element=>{
                     </div>
                     <div className="main-todo-2-children mt-12">
                         <GenerateTodos todosMod={todosMod}/>
+                        {!todoArray.length && <p className="mt-10 text-center text-gray-400">Whpeewww! No task to do 🥳🥳</p>}
                     </div>
                 </section>
             </main>
