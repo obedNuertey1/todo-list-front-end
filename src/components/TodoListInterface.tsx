@@ -9,12 +9,12 @@ export default ():JSX.Element=>{
     const todosMod:Todo.Itodos<string>[] = todoArray.map((elem:string, index: number)=>{
         return {
             className: {
-                wrapperClass: "main-todo-2-children flex flex-row flex-nowrap items-center h-auto justify-start border-b pb-1 mt-1 hover:border-1 hover:border-solid hover:border-gray-200 hover:shadow-md",
+                wrapperClass: "main-todo-2-children flex flex-row flex-nowrap items-center h-auto justify-start border-b py-1 hover:border-1 hover:border-solid hover:border-gray-200 hover:shadow-md",
                 descriptionClass: "w-1/2 font text-ellipsis break-words",
                 editClass: "w-1/4 pl-1",
                 deleteClass: "w-1/4 pl-1",
-                editButtonClass: "bg-yellow-500 text-black px-1 py-0.5 rounded hover:bg-white hover:text-yellow-500 hover:border-2 hover:border-solid hover:border-yellow-500 hover:px-1 hover:py-0.5",
-                deleteButtonClass: "bg-red-600 text-white px-1 py-0.5 rounded hover:bg-white hover:text-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:px-1 hover:py-0.5"
+                editButtonClass: "bg-yellow-500 text-black px-1 py-0.5 rounded border-2 border-solid border-yellow-500 hover:bg-white hover:text-yellow-500 ml-2",
+                deleteButtonClass: "bg-red-600 text-white px-1 py-0.5 rounded border-2 border-solid border-red-600 hover:bg-white hover:text-red-600 ml-2.5"
             },
             description: elem,
             id: `${index}`,
@@ -52,9 +52,11 @@ export default ():JSX.Element=>{
     const handleSubmit = (e:any):void=>{
         e.preventDefault();
 
-        // @ts-ignore
-        setTodoArray([addTodo, ...todoArray]);
-        setAddTodo('');
+        if(addTodo){
+            // @ts-ignore
+            setTodoArray([addTodo, ...todoArray]);
+            setAddTodo('');
+        }
     };
 
     const handleChange = (e:any):void=>{
@@ -70,17 +72,16 @@ export default ():JSX.Element=>{
                 <section className="main-todo">
                     <form onSubmit={handleSubmit} className="flex flex-row gap-1">
                         <input type="text" value={addTodo} onChange={handleChange} placeholder="Add todo" className="border-gray-200 border-solid border shadow-md w-11/12 rounded p-1.5 focus:outline-green-500 focus:outline-2 focus:outline-dashed" />
-                        <button type="submit" className="bg-green-500 text-white px-3 rounded shadow-md active:border-2 active:border-green-500 active:text-green-500 active:bg-white active:px-3 active:border-spacing-0 active:shadow-none active:scale-95">Add</button>
+                        <button type="submit" className="bg-green-500 text-white px-3 rounded shadow-md border-2 border-green-500 border-solid active:text-green-500 active:bg-white active:shadow-none active:scale-95">Add</button>
                     </form>
                 </section>
-                <hr className="mt-10 mb-2" />
-                <section className="main-todo relative h-4/5 overflow-y-auto">
-                    <div className="main-todo-2-children font-bold flex flex-row flex-nowrap items-center justify-start border-b pb-1 fixed z-10 bg-white left-0 right-0 top-auto bottom-auto px-2 max-w-4xl m-auto ">
+                <section className="main-todo mt-10 relative h-96 overflow-y-auto">
+                    <div className="main-todo-2-children font-bold flex flex-row flex-nowrap items-center justify-start border-b py-2 fixed z-10 bg-white left-0 right-0 top-auto bottom-auto px-2 max-w-4xl m-auto border-t border-gray-300 border-solid">
                         <div className="w-1/2"><h1>Description</h1></div>
                         <div className="w-1/4 border-l border-gray-300 border-solid pl-1"><h1 >Edit</h1></div>
                         <div className="w-1/4 border-l border-gray-300 border-solid pl-1"><h1 >Delete</h1></div>
                     </div>
-                    <div className="main-todo-2-children mt-10">
+                    <div className="main-todo-2-children mt-12">
                         <GenerateTodos todosMod={todosMod}/>
                     </div>
                 </section>
